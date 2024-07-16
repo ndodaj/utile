@@ -30,6 +30,8 @@ public class SecurityConfig {
                         .anyRequest().authenticated())
                 .formLogin(Customizer.withDefaults())
 
+                .oauth2Login(Customizer.withDefaults())
+
                 .build();
     }
 

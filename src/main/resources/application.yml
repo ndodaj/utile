@@ -4,3 +4,13 @@ spring:
     name: Utile
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 283489240636-jq61geccnle78es1rlgc0uiva9dfktks.apps.googleusercontent.com
+            client-secret: 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
+
+
