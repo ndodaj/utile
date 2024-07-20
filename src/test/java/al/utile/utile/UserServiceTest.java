@@ -1,10 +1,10 @@
 package al.utile.utile;
 
 import al.utile.utile.converter.UserConverter;
-import al.utile.utile.dto.UserDto;
 import al.utile.utile.entity.UserEntity;
 import al.utile.utile.repository.UserRepository;
 import al.utile.utile.service.UserService;
+import al.utile.utile_rest_common.utile.UserDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

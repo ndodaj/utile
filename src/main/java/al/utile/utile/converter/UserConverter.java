@@ -1,7 +1,7 @@
 package al.utile.utile.converter;
 
-import al.utile.utile.dto.UserDto;
 import al.utile.utile.entity.UserEntity;
+import al.utile.utile_rest_common.utile.UserDto;
 import org.springframework.stereotype.Component;
 
 @Component

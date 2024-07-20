@@ -1,7 +1,7 @@
 package al.utile.utile.controller;
 
-import al.utile.utile.dto.UserDto;
 import al.utile.utile.service.UserService;
+import al.utile.utile_rest_common.utile.UserDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;

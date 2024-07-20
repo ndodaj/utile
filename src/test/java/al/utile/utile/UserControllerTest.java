@@ -1,8 +1,8 @@
 package al.utile.utile;
 
 import al.utile.utile.controller.UserController;
-import al.utile.utile.dto.UserDto;
 import al.utile.utile.service.UserService;
+import al.utile.utile_rest_common.utile.UserDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

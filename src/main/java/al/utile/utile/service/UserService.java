@@ -1,9 +1,9 @@
 package al.utile.utile.service;
 
 import al.utile.utile.converter.UserConverter;
-import al.utile.utile.dto.UserDto;
 import al.utile.utile.entity.UserEntity;
 import al.utile.utile.repository.UserRepository;
+import al.utile.utile_rest_common.utile.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
