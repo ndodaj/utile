@@ -4,6 +4,7 @@ import al.utile.utile.converter.UserConverter;
 import al.utile.utile.entity.UserEntity;
 import al.utile.utile.repository.UserRepository;
 import al.utile.utile_rest_common.utile.UserDto;
+import al.utile.utile_rest_common.utile.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,6 +45,10 @@ public class UserService {
 
     public void deleteUser(Long id) {
         userRepository.deleteById(id);
+    }
+
+    public void registerUser(UserRegistrationDto userRegistrationDto) {
+        userRepository.save(userConverter.toEntity(userRegistrationDto));
     }
 }
 

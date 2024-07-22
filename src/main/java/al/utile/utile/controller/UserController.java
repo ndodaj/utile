@@ -2,9 +2,14 @@ package al.utile.utile.controller;
 
 import al.utile.utile.service.UserService;
 import al.utile.utile_rest_common.utile.UserDto;
+import al.utile.utile_rest_common.utile.UserRegistrationDto;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +35,7 @@ public class UserController {
     @Operation(summary = "Get all users", description = "Retrieve a list of all users")
 
     public List<UserDto> getAllUsers() {
+
         return userService.getAllUsers();
     }
 
@@ -41,10 +47,25 @@ public class UserController {
     }
 
     @PostMapping
-    @Operation(summary = "Create a new user", description = "Add a new user to the system")
+    @Operation(summary = "Register a new user in the system",
+            description = "Register a new user in the system. User is validated"
+
+    )
 
     public UserDto createUser(@RequestBody UserDto userDTO) {
         return userService.saveUser(userDTO);
+    }
+
+    @Operation(
+            summary = "Register a new user",
+            description = "Registers a new user with the provided details",
+            security = @SecurityRequirement(name = "bearerAuth")
+    )
+    @PostMapping("/register")
+    public ResponseEntity<String> registerUser(@Valid @RequestBody UserRegistrationDto userRegistrationDto) {
+        // Handle user registration
+        userService.registerUser(userRegistrationDto);
+        return new ResponseEntity<>("User registered successfully", HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
