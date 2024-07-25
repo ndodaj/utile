@@ -4,7 +4,7 @@ import al.utile.utile.converter.UserConverter;
 import al.utile.utile.entity.UserEntity;
 import al.utile.utile.repository.UserRepository;
 import al.utile.utile.service.UserService;
-import al.utile.utile_rest_common.utile.UserDto;
+import al.utile.utile_common.utile.UserDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -38,11 +38,11 @@ public class UserServiceTest {
         UserEntity entity = new UserEntity();
         entity.setUserId(1);
 
-        when(userRepository.findById(1L)).thenReturn(Optional.of(entity));
-        when(userConverter.toDto(entity)).thenReturn(dto);
+        Mockito.when(userRepository.findById(1L)).thenReturn(Optional.of(entity));
+        Mockito.when(userConverter.toDto(entity)).thenReturn(dto);
 
         Optional<UserDto> result = userService.getUserById(1L);
-        assertEquals(Optional.of(dto), result);
+        Assertions.assertEquals(Optional.of(dto), result);
     }
 
     // Add more tests for other service methods...

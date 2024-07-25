@@ -37,12 +37,12 @@ public class JobServiceTest {
         job.setId(1L);
         job.setTitle("Test Title");
 
-        when(jobRepository.findAll()).thenReturn(List.of(job));
+        Mockito.when(jobRepository.findAll()).thenReturn(List.of(job));
 
         List<JobDTO> jobDTOs = jobService.findAll();
 
-        assertEquals(1, jobDTOs.size());
-        assertEquals("Test Title", jobDTOs.get(0).title());
+        Assertions.assertEquals(1, jobDTOs.size());
+        Assertions.assertEquals("Test Title", jobDTOs.get(0).title());
     }
 
     @Test
@@ -51,12 +51,12 @@ public class JobServiceTest {
         job.setId(1L);
         job.setTitle("Test Title");
 
-        when(jobRepository.findById(1L)).thenReturn(Optional.of(job));
+        Mockito.when(jobRepository.findById(1L)).thenReturn(Optional.of(job));
 
         Optional<JobDTO> jobDTO = jobService.findById(1L);
 
-        assertTrue(jobDTO.isPresent());
-        assertEquals("Test Title", jobDTO.get().title());
+        Assertions.assertTrue(jobDTO.isPresent());
+        Assertions.assertEquals("Test Title", jobDTO.get().title());
     }
 
     @Test
@@ -65,7 +65,7 @@ public class JobServiceTest {
         job.setId(1L);
         job.setTitle("Test Title");
 
-        when(jobRepository.save(any(JobEntity.class))).thenReturn(job);
+        Mockito.when(jobRepository.save(ArgumentMatchers.any(JobEntity.class))).thenReturn(job);
 
         JobDTO jobDTO = new JobDTO(
                 null,
@@ -84,7 +84,7 @@ public class JobServiceTest {
 
         JobDTO savedJob = jobService.save(jobDTO);
 
-        assertEquals("Test Title", savedJob.title());
+        Assertions.assertEquals("Test Title", savedJob.title());
     }
 
     @Test
@@ -93,8 +93,8 @@ public class JobServiceTest {
         job.setId(1L);
         job.setTitle("Test Title");
 
-        when(jobRepository.existsById(1L)).thenReturn(true);
-        when(jobRepository.save(any(JobEntity.class))).thenReturn(job);
+        Mockito.when(jobRepository.existsById(1L)).thenReturn(true);
+        Mockito.when(jobRepository.save(ArgumentMatchers.any(JobEntity.class))).thenReturn(job);
 
         JobDTO jobDTO = new JobDTO(
                 null,
@@ -113,13 +113,13 @@ public class JobServiceTest {
 
         JobDTO updatedJob = jobService.update(1L, jobDTO);
 
-        assertEquals("Updated Title", updatedJob.title());
+        Assertions.assertEquals("Updated Title", updatedJob.title());
     }
 
     @Test
     public void testDelete() {
         jobService.delete(1L);
-        verify(jobRepository, times(1)).deleteById(1L);
+        Mockito.verify(jobRepository, Mockito.times(1)).deleteById(1L);
     }
 }
 

@@ -2,19 +2,31 @@ spring:
   application:
     name: Utile
   datasource:
-    url: jdbc:mysql://localhost:3306/utile
-    username: root
+#    url: jdbc:mysql://localhost:3306/utile
+#    username: root
+#    password: root
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:postgresql://localhost:5432/utile
+    username: postgres
     password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: org.postgresql.Driver
   jpa:
-    hibernate:
-      ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL8Dialect
+        dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
     generate-ddl: true
-    database-platform: org.hibernate.dialect.MySQL8Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    table: SCHEMA_HISTORY
+    locations:
+      - classpath:/db/migration
+      - classpath:/db/migration-data
+    schemas: utile
 
   security:
     oauth2:
@@ -26,13 +38,6 @@ spring:
             scope: profile, email
             redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
             client-name: Google
-
-logging:
-  level:
-    root: INFO
-    org:
-      springframework:
-        security: DEBUG
 
 springdoc:
   swagger-ui:

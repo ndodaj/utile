@@ -38,11 +38,11 @@ public class RoleServiceTest {
         entity.setRoleId(1);
         RoleDto dto = new RoleDto(1, null, null, null);
 
-        when(roleRepository.findById(1L)).thenReturn(Optional.of(entity));
-        when(roleConverter.toDto(entity)).thenReturn(dto);
+        Mockito.when(roleRepository.findById(1L)).thenReturn(Optional.of(entity));
+        Mockito.when(roleConverter.toDto(entity)).thenReturn(dto);
 
         Optional<RoleDto> result = roleService.getRoleById(1L);
-        assertEquals(Optional.of(dto), result);
+        Assertions.assertEquals(Optional.of(dto), result);
     }
 
     // Add more tests for other service methods...

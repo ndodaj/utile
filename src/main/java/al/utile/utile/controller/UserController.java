@@ -1,15 +1,18 @@
 package al.utile.utile.controller;
 
 import al.utile.utile.service.UserService;
-import al.utile.utile_rest_common.utile.UserDto;
-import al.utile.utile_rest_common.utile.UserRegistrationDto;
+import al.utile.utile_common.utile.UserDto;
+import al.utile.utile_common.utile.UserRegistrationDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +29,10 @@ import java.util.Optional;
 @RequestMapping("/users")
 @Tag(name = "Users", description = "User management APIs")
 
+@Validated
 public class UserController {
+
+    Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
@@ -64,6 +70,8 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@Valid @RequestBody UserRegistrationDto userRegistrationDto) {
         // Handle user registration
+        logger.trace("User to be registered: {}", userRegistrationDto.toString());
+        logger.info("User to be registered: {}", userRegistrationDto);
         userService.registerUser(userRegistrationDto);
         return new ResponseEntity<>("User registered successfully", HttpStatus.CREATED);
     }
@@ -77,7 +85,6 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a user", description = "Delete a user by their ID")
-
     public void deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
     }

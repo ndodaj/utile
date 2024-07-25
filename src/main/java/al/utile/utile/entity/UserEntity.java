@@ -1,7 +1,7 @@
 package al.utile.utile.entity;
 
 
-import al.utile.utile_rest_common.utile.AccountType;
+import al.utile.utile_common.utile.AccountType;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,6 +19,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -34,20 +35,23 @@ import java.util.Set;
 public class UserEntity extends AuditEntity<String> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id", updatable = false, nullable = false)
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name = "id", updatable = false, nullable = false)
     @NotNull
-    private Integer userId;
+    private Integer id;
 
     @NotBlank
+    @Size(min = 5, max = 45)
     @Column(unique = true, nullable = false, name = "username")
     private String username;
 
     @NotBlank
+    @Size(max = 255)
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
     @NotBlank
+    @Size(max = 255)
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
@@ -72,7 +76,7 @@ public class UserEntity extends AuditEntity<String> {
     @Column(length = 255)
     private String address;
 
-    @NotBlank
+    @NotNull
     @Column(name = "account_type")
     @Enumerated(EnumType.STRING)
     private AccountType accountType;

@@ -43,24 +43,24 @@ public class RoleControllerTest {
     public void testGetAllRoles() throws Exception {
         RoleDto dto = new RoleDto(1, null, null, null);
 
-        when(roleService.getAllRoles()).thenReturn(Collections.singletonList(dto));
+        Mockito.when(roleService.getAllRoles()).thenReturn(Collections.singletonList(dto));
 
-        mockMvc.perform(get("/roles")
+        mockMvc.perform(MockMvcRequestBuilders.get("/roles")
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id", is(dto.id())));
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].id", Matchers.is(dto.id())));
     }
 
     @Test
     public void testGetRoleById() throws Exception {
         RoleDto dto = new RoleDto(1, null, null, null);
 
-        when(roleService.getRoleById(1L)).thenReturn(Optional.of(dto));
+        Mockito.when(roleService.getRoleById(1L)).thenReturn(Optional.of(dto));
 
-        mockMvc.perform(get("/roles/{id}", 1L)
+        mockMvc.perform(MockMvcRequestBuilders.get("/roles/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(dto.id())));
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.is(dto.id())));
     }
 
     // Add more tests for other controller methods...

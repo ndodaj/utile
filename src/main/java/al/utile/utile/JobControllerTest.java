@@ -46,11 +46,11 @@ public class JobControllerTest {
                 null
         );
 
-        when(jobService.findAll()).thenReturn(List.of(jobDTO));
+        Mockito.when(jobService.findAll()).thenReturn(List.of(jobDTO));
 
-        mockMvc.perform(get("/api/jobs"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].title").value("Test Title"));
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/jobs"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].title").value("Test Title"));
     }
 
     @Test
@@ -70,11 +70,11 @@ public class JobControllerTest {
                 null
         );
 
-        when(jobService.findById(anyLong())).thenReturn(Optional.of(jobDTO));
+        Mockito.when(jobService.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(jobDTO));
 
-        mockMvc.perform(get("/api/jobs/1"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.title").value("Test Title"));
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/jobs/1"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("Test Title"));
     }
 
     @Test
@@ -109,13 +109,13 @@ public class JobControllerTest {
                 null
         );
 
-        when(jobService.save(any(JobDTO.class))).thenReturn(createdJobDTO);
+        Mockito.when(jobService.save(ArgumentMatchers.any(JobDTO.class))).thenReturn(createdJobDTO);
 
-        mockMvc.perform(post("/api/jobs")
+        mockMvc.perform(MockMvcRequestBuilders.post("/api/jobs")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{ \"title\": \"Test Title\", \"description\": \"Test Description\", \"address\": \"Test Address\", \"zone\": \"Test Zone\", \"typeOfProfessional\": \"Test Professional\", \"postedBy\": \"Test Poster\", \"contact\": \"Test Contact\" }"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.title").value("Test Title"));
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("Test Title"));
     }
 
     @Test
@@ -150,19 +150,19 @@ public class JobControllerTest {
                 null
         );
 
-        when(jobService.update(anyLong(), any(JobDTO.class))).thenReturn(updatedJobDTO);
+        Mockito.when(jobService.update(ArgumentMatchers.anyLong(), ArgumentMatchers.any(JobDTO.class))).thenReturn(updatedJobDTO);
 
-        mockMvc.perform(put("/api/jobs/1")
+        mockMvc.perform(MockMvcRequestBuilders.put("/api/jobs/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{ \"title\": \"Updated Title\", \"description\": \"Test Description\", \"address\": \"Test Address\", \"zone\": \"Test Zone\", \"typeOfProfessional\": \"Test Professional\", \"postedBy\": \"Test Poster\", \"contact\": \"Test Contact\" }"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.title").value("Updated Title"));
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("Updated Title"));
     }
 
     @Test
     public void testDeleteJob() throws Exception {
-        mockMvc.perform(delete("/api/jobs/1"))
-                .andExpect(status().isOk());
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/jobs/1"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
 
         Mockito.verify(jobService, Mockito.times(1)).delete(1L);
     }

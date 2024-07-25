@@ -1,12 +1,19 @@
 package al.utile.utile.converter;
 
 import al.utile.utile.entity.UserEntity;
-import al.utile.utile_rest_common.utile.UserDto;
-import al.utile.utile_rest_common.utile.UserRegistrationDto;
+import al.utile.utile_common.utile.UserDto;
+import al.utile.utile_common.utile.UserRegistrationDto;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
+@Slf4j
 public class UserConverter {
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public UserEntity toEntity(UserRegistrationDto userRegistrationDto) {
         UserEntity entity = new UserEntity();
@@ -17,21 +24,21 @@ public class UserConverter {
         entity.setBirthday(userRegistrationDto.birthday());
         entity.setMobilePhone(userRegistrationDto.mobilePhone());
         entity.setAddress(userRegistrationDto.address());
-        entity.setPassword(userRegistrationDto.password());
+        entity.setPassword(passwordEncoder.encode(userRegistrationDto.password()));
         entity.setAccountType(userRegistrationDto.accountType());
         return entity;
     }
 
     public UserDto toDto(UserEntity entity) {
         return new UserDto(
-                entity.getUserId(),
+                entity.getId(),
                 entity.getUsername()
         );
     }
 
     public UserEntity toEntity(UserDto dto) {
         UserEntity entity = new UserEntity();
-        entity.setUserId(dto.id());
+        entity.setId(dto.id());
         entity.setUsername(dto.username());
         return entity;
     }

@@ -20,30 +20,30 @@ public class SecurityTest {
 
     @Test
     public void testAccessWithoutAuth() throws Exception {
-        mockMvc.perform(get("/users"))
-                .andExpect(status().isUnauthorized());
+        mockMvc.perform(MockMvcRequestBuilders.get("/users"))
+                .andExpect(MockMvcResultMatchers.status().isUnauthorized());
 
-        mockMvc.perform(get("/roles"))
-                .andExpect(status().isUnauthorized());
+        mockMvc.perform(MockMvcRequestBuilders.get("/roles"))
+                .andExpect(MockMvcResultMatchers.status().isUnauthorized());
     }
 
     @Test
     @WithMockUser(username = "user", roles = "USER")
     public void testAccessWithUserRole() throws Exception {
-        mockMvc.perform(get("/users"))
-                .andExpect(status().isForbidden());
+        mockMvc.perform(MockMvcRequestBuilders.get("/users"))
+                .andExpect(MockMvcResultMatchers.status().isForbidden());
 
-        mockMvc.perform(get("/roles"))
-                .andExpect(status().isForbidden());
+        mockMvc.perform(MockMvcRequestBuilders.get("/roles"))
+                .andExpect(MockMvcResultMatchers.status().isForbidden());
     }
 
     @Test
     @WithMockUser(username = "admin", roles = "ADMIN")
     public void testAccessWithAdminRole() throws Exception {
-        mockMvc.perform(get("/users"))
-                .andExpect(status().isOk());
+        mockMvc.perform(MockMvcRequestBuilders.get("/users"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
 
-        mockMvc.perform(get("/roles"))
-                .andExpect(status().isOk());
+        mockMvc.perform(MockMvcRequestBuilders.get("/roles"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
     }
 }

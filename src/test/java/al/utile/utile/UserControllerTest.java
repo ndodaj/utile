@@ -2,7 +2,7 @@ package al.utile.utile;
 
 import al.utile.utile.controller.UserController;
 import al.utile.utile.service.UserService;
-import al.utile.utile_rest_common.utile.UserDto;
+import al.utile.utile_common.utile.UserDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,24 +43,24 @@ public class UserControllerTest {
     public void testGetAllUsers() throws Exception {
         UserDto dto = new UserDto(1, null);
 
-        when(userService.getAllUsers()).thenReturn(Collections.singletonList(dto));
+        Mockito.when(userService.getAllUsers()).thenReturn(Collections.singletonList(dto));
 
-        mockMvc.perform(get("/users")
+        mockMvc.perform(MockMvcRequestBuilders.get("/users")
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id", is(dto.id())));
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].id", Matchers.is(dto.id())));
     }
 
     @Test
     public void testGetUserById() throws Exception {
         UserDto dto = new UserDto(1, null);
 
-        when(userService.getUserById(1L)).thenReturn(Optional.of(dto));
+        Mockito.when(userService.getUserById(1L)).thenReturn(Optional.of(dto));
 
-        mockMvc.perform(get("/users/{id}", 1L)
+        mockMvc.perform(MockMvcRequestBuilders.get("/users/{id}", 1L)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(dto.id())));
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.is(dto.id())));
     }
 
     // Add more tests for other controller methods...

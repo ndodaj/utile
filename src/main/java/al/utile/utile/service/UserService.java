@@ -3,16 +3,19 @@ package al.utile.utile.service;
 import al.utile.utile.converter.UserConverter;
 import al.utile.utile.entity.UserEntity;
 import al.utile.utile.repository.UserRepository;
-import al.utile.utile_rest_common.utile.UserDto;
-import al.utile.utile_rest_common.utile.UserRegistrationDto;
+import al.utile.utile_common.utile.UserDto;
+import al.utile.utile_common.utile.UserRegistrationDto;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Validated
 public class UserService {
 
     @Autowired
@@ -47,7 +50,7 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public void registerUser(UserRegistrationDto userRegistrationDto) {
+    public void registerUser(@Valid UserRegistrationDto userRegistrationDto) {
         userRepository.save(userConverter.toEntity(userRegistrationDto));
     }
 }
