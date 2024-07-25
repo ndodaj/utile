@@ -15,10 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(JobController.class)
 public class JobControllerTest {
@@ -46,7 +43,7 @@ public class JobControllerTest {
                 null
         );
 
-        Mockito.when(jobService.findAll()).thenReturn(List.of(jobDTO));
+        when(jobService.findAll()).thenReturn(List.of(jobDTO));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/jobs"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -70,7 +67,7 @@ public class JobControllerTest {
                 null
         );
 
-        Mockito.when(jobService.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(jobDTO));
+        when(jobService.findById(ArgumentMatchers.anyLong())).thenReturn(Optional.of(jobDTO));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/jobs/1"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
@@ -109,7 +106,7 @@ public class JobControllerTest {
                 null
         );
 
-        Mockito.when(jobService.save(ArgumentMatchers.any(JobDTO.class))).thenReturn(createdJobDTO);
+        when(jobService.save(ArgumentMatchers.any(JobDTO.class))).thenReturn(createdJobDTO);
 
         mockMvc.perform(MockMvcRequestBuilders.post("/api/jobs")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -150,7 +147,7 @@ public class JobControllerTest {
                 null
         );
 
-        Mockito.when(jobService.update(ArgumentMatchers.anyLong(), ArgumentMatchers.any(JobDTO.class))).thenReturn(updatedJobDTO);
+        when(jobService.update(ArgumentMatchers.anyLong(), ArgumentMatchers.any(JobDTO.class))).thenReturn(updatedJobDTO);
 
         mockMvc.perform(MockMvcRequestBuilders.put("/api/jobs/1")
                         .contentType(MediaType.APPLICATION_JSON)
