@@ -16,15 +16,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table
+@Table(name = "roles")
 public class RoleEntity extends AuditEntity<String> {
 
     @Id
-    @Column(name = "role_id", unique = true, nullable = false)
+    @Column(name = "id", unique = true, nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int roleId;
+    private int id;
 
-    @Column(name = "role")
+    @Column(name = "name")
     @Enumerated(EnumType.STRING)
     private RoleEnum name;
 

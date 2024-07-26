@@ -1,4 +1,5 @@
-INSERT INTO roles (name, description, created_by, last_modified_by)
+INSERT INTO roles
+    (name, description, status, created_date, last_modified_date, created_by, last_modified_by)
 VALUES
-    ('ROLE_USER', 'Standard user role', 'admin', 'admin'),
-    ('ROLE_ADMIN', 'Administrator role', 'admin', 'admin');
+
+    ('ADMIN', 'Administrator role', 'ACTIVE', '2024-07-26 12:00:00', '2024-07-26 12:00:00', 'system', 'system');

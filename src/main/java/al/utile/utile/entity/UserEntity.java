@@ -1,6 +1,7 @@
 package al.utile.utile.entity;
 
 
+import al.utile.utile.dto.StatusEnum;
 import al.utile.utile_common.utile.AccountType;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -73,13 +74,17 @@ public class UserEntity extends AuditEntity<String> {
     private String mobilePhone;
 
     @NotBlank(message = "Address is mandatory")
-    @Column(length = 255)
+    @Column(name = "address")
     private String address;
 
     @NotNull
     @Column(name = "account_type")
     @Enumerated(EnumType.STRING)
     private AccountType accountType;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private StatusEnum status;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(

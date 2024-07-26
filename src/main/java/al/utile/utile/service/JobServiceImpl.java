@@ -2,6 +2,7 @@ package al.utile.utile.service;
 
 import al.utile.utile.converter.JobConverter;
 import al.utile.utile.dto.JobDto;
+import al.utile.utile.entity.JobEntity;
 import al.utile.utile.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -41,25 +42,17 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public JobDto update(Long id, JobDto JobDto) {
+    public JobDto update(Long id, JobDto updatedJobDto) {
         if (!jobRepository.existsById(id)) {
             throw new RuntimeException("Job not found");
         }
-        JobDto = new JobDto(
-                id,
-                JobDto.title(),
-                JobDto.description(),
-                JobDto.address(),
-                JobDto.zone(),
-                JobDto.typeOfProfessional(),
-                JobDto.postedBy(),
-                JobDto.contact(),
-                JobDto.createdDate(),
-                JobDto.lastModifiedDate(),
-                JobDto.createdBy(),
-                JobDto.lastModifiedBy()
-        );
-        return jobConverter.entityToDto(jobRepository.save(jobConverter.dtoToEntity(JobDto)));
+
+        JobEntity JobEntity = jobRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Job not found"));
+
+        JobEntity updatedJob = jobConverter.updateJobEntity(updatedJobDto, JobEntity);
+        jobRepository.save(updatedJob);
+        return jobConverter.entityToDto(updatedJob);
     }
 
     @Override

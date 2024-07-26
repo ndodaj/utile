@@ -1,0 +1,31 @@
+INSERT INTO job (
+    title,
+    postcode,
+    estimated_start_date,
+    estimated_duration,
+    description,
+    address,
+    zone,
+    type_of_professional,
+    phone_number,
+    status,
+    created_date,
+    last_modified_date,
+    created_by,
+    last_modified_by
+) VALUES (
+             'Software Development',
+             '12345',
+             '2024-08-01',
+             30,
+             'Developing a new software feature',
+             '456 Tech Lane',
+             'Tech Zone',
+             'Software Developer',
+             '+11234567890',
+             'ACTIVE',
+             '2024-07-26 12:00:00',
+             '2024-07-26 12:00:00',
+             'system',
+             'system'
+         );

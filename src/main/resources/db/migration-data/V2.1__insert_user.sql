@@ -1,6 +1,30 @@
-
-INSERT INTO users (username, password, email, first_name, last_name, birthday, mobilePhone, account_type, created_by, last_modified_by)
-VALUES
-    ('user1', '{noop}password1', 'user1@example.com', 'John', 'Doe', '1985-01-15', '123-456-7890', 'STANDARD', 'admin', 'admin'),
-    ('admin1', '{noop}adminpassword1', 'admin1@example.com', 'Admin', 'User', '1975-12-20', '123-456-7891', 'ADMIN', 'admin', 'admin');
--- $2a$10$fAb5yDYznme2vPNov0KY1eyJfNFo4yteoeC/V1oRhJNgwwvzn52B6
+INSERT INTO users (
+                   username,
+                   first_name,
+                   last_name,
+                   email,
+                   password,
+                   birthday,
+                   mobile_phone,
+                   address,
+                   account_type,
+                   status,
+                   created_date,
+                   last_modified_date,
+                   created_by,
+                   last_modified_by)
+VALUES ('john_doe',
+        'John',
+        'Doe',
+        'john.doe@example.com',
+        'securepassword',
+        '1990-01-01',
+        '+1234567890',
+        '123 Main St, Anytown, USA',
+        'STANDARD',
+        'ACTIVE',
+        '2024-07-26 12:00:00',
+        '2024-07-26 12:00:00',
+        'system',
+        'system');
+-- -- $2a$10$fAb5yDYznme2vPNov0KY1eyJfNFo4yteoeC/V1oRhJNgwwvzn52B6
