@@ -1,6 +1,6 @@
 package al.utile.utile.controller;
 
-import al.utile.utile.dto.JobDTO;
+import al.utile.utile.dto.JobDto;
 import al.utile.utile.service.JobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,23 +15,23 @@ public class JobController {
     private JobService jobService;
 
     @GetMapping
-    public List<JobDTO> getAllJobs() {
+    public List<JobDto> getAllJobs() {
         return jobService.findAll();
     }
 
     @GetMapping("/{id}")
-    public JobDTO getJobById(@PathVariable Long id) {
+    public JobDto getJobById(@PathVariable Long id) {
         return jobService.findById(id).orElseThrow(() -> new RuntimeException("Job not found"));
     }
 
     @PostMapping
-    public JobDTO createJob(@RequestBody JobDTO jobDTO) {
-        return jobService.save(jobDTO);
+    public JobDto createJob(@RequestBody JobDto JobDto) {
+        return jobService.save(JobDto);
     }
 
     @PutMapping("/{id}")
-    public JobDTO updateJob(@PathVariable Long id, @RequestBody JobDTO jobDTO) {
-        return jobService.update(id, jobDTO);
+    public JobDto updateJob(@PathVariable Long id, @RequestBody JobDto JobDto) {
+        return jobService.update(id, JobDto);
     }
 
     @DeleteMapping("/{id}")

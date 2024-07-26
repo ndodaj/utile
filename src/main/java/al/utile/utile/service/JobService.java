@@ -1,20 +1,20 @@
 package al.utile.utile.service;
 
 
-import al.utile.utile.dto.JobDTO;
+import al.utile.utile.dto.JobDto;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface JobService {
 
-    List<JobDTO> findAll();
+    List<JobDto> findAll();
 
-    Optional<JobDTO> findById(Long id);
+    Optional<JobDto> findById(Long id);
 
-    JobDTO save(JobDTO jobDTO);
+    JobDto save(JobDto JobDto);
 
-    JobDTO update(Long id, JobDTO jobDTO);
+    JobDto update(Long id, JobDto JobDto);
 
     void delete(Long id);
 }

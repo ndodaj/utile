@@ -1,7 +1,7 @@
 package al.utile.utile.service;
 
 import al.utile.utile.converter.JobConverter;
-import al.utile.utile.dto.JobDTO;
+import al.utile.utile.dto.JobDto;
 import al.utile.utile.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public List<JobDTO> findAll() {
+    public List<JobDto> findAll() {
         return jobRepository.findAll()
                 .stream()
                 .map(jobConverter::entityToDto)
@@ -31,35 +31,35 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public Optional<JobDTO> findById(Long id) {
+    public Optional<JobDto> findById(Long id) {
         return jobRepository.findById(id).map(jobConverter::entityToDto);
     }
 
     @Override
-    public JobDTO save(JobDTO jobDTO) {
-        return jobConverter.entityToDto(jobRepository.save(jobConverter.dtoToEntity(jobDTO)));
+    public JobDto save(JobDto JobDto) {
+        return jobConverter.entityToDto(jobRepository.save(jobConverter.dtoToEntity(JobDto)));
     }
 
     @Override
-    public JobDTO update(Long id, JobDTO jobDTO) {
+    public JobDto update(Long id, JobDto JobDto) {
         if (!jobRepository.existsById(id)) {
             throw new RuntimeException("Job not found");
         }
-        jobDTO = new JobDTO(
+        JobDto = new JobDto(
                 id,
-                jobDTO.title(),
-                jobDTO.description(),
-                jobDTO.address(),
-                jobDTO.zone(),
-                jobDTO.typeOfProfessional(),
-                jobDTO.postedBy(),
-                jobDTO.contact(),
-                jobDTO.createdDate(),
-                jobDTO.lastModifiedDate(),
-                jobDTO.createdBy(),
-                jobDTO.lastModifiedBy()
+                JobDto.title(),
+                JobDto.description(),
+                JobDto.address(),
+                JobDto.zone(),
+                JobDto.typeOfProfessional(),
+                JobDto.postedBy(),
+                JobDto.contact(),
+                JobDto.createdDate(),
+                JobDto.lastModifiedDate(),
+                JobDto.createdBy(),
+                JobDto.lastModifiedBy()
         );
-        return jobConverter.entityToDto(jobRepository.save(jobConverter.dtoToEntity(jobDTO)));
+        return jobConverter.entityToDto(jobRepository.save(jobConverter.dtoToEntity(JobDto)));
     }
 
     @Override

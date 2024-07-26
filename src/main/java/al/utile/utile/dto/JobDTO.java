@@ -1,20 +1,18 @@
 package al.utile.utile.dto;
 
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
-public record JobDTO(
+public record JobDto(
         Long id,
         String title,
+        String postcode,
+        LocalDate estimatedStartDate,
+        Integer estimatedDuration,
         String description,
         String address,
         String zone,
         String typeOfProfessional,
-        String postedBy,
-        String contact,
-        LocalDateTime createdDate,
-        LocalDateTime lastModifiedDate,
-        String createdBy,
-        String lastModifiedBy
+        String phoneNumber
 ) {}
 
