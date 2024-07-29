@@ -37,6 +37,6 @@ public class AuthenticationController {
 
     @GetMapping("/utile-test")
     public String test() {
-        return "Ori eshte zemra ime";
+        return "utile test";
     }
 }
