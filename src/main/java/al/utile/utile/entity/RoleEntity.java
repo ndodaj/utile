@@ -16,7 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "roles")
+@Table(name = "roles", schema = "utile")
 public class RoleEntity extends AuditEntity<String> {
 
     @Id

@@ -26,13 +26,14 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
 @Getter
 @Setter
 @Entity
-@Table(name = "users")
+@Table(name = "users", schema = "utile")
 public class UserEntity extends AuditEntity<String> {
 
     @Id
@@ -86,13 +87,14 @@ public class UserEntity extends AuditEntity<String> {
     @Column(name = "status")
     private StatusEnum status;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany
     @JoinTable(
+            schema = "utile",
             name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-    private Set<RoleEntity> roles = new HashSet<>();
+    private List<RoleEntity> roles;
 
 }
 
