@@ -20,7 +20,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Entity
-@Table(name = "job", schema = "utile")
+@Table(name = "jobs", schema = "utile")
 public class JobEntity extends AuditEntity<String> {
 
     @Id

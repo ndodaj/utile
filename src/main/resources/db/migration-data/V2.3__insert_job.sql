@@ -1,4 +1,4 @@
-INSERT INTO job (
+INSERT INTO jobs (
     title,
     postcode,
     estimated_start_date,

@@ -37,9 +37,8 @@ import java.util.Set;
 public class UserEntity extends AuditEntity<String> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false, nullable = false)
-    @NotNull
     private Integer id;
 
     @NotBlank
