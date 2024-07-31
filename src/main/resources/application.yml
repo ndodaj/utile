@@ -2,11 +2,7 @@ spring:
   application:
     name: utile-main
   datasource:
-#    url: jdbc:mysql://localhost:3306/utile
-#    username: root
-#    password: root
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:postgresql://localhost:5432/utile
+    url: jdbc:postgresql://localhost:5432/utile-db
     username: postgres
     password: root
     driver-class-name: org.postgresql.Driver

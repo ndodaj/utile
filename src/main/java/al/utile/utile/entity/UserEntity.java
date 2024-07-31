@@ -1,14 +1,12 @@
 package al.utile.utile.entity;
 
 
-import al.utile.utile.dto.StatusEnum;
+import al.utile.utile_common.utile.StatusEnum;
 import al.utile.utile_common.utile.AccountType;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,9 +23,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 
 @Getter
