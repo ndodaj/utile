@@ -1,6 +1,6 @@
 spring:
   application:
-    name: utile-app
+    name: utile-main
   datasource:
 #    url: jdbc:mysql://localhost:3306/utile
 #    username: root
