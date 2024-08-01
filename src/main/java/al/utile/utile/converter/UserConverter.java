@@ -4,7 +4,6 @@ import al.utile.utile.entity.UserEntity;
 import al.utile.utile_common.utile.UserDto;
 import al.utile.utile_common.utile.UserRegistrationDto;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -12,8 +11,11 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class UserConverter {
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
+
+    public UserConverter(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public UserEntity toEntity(UserRegistrationDto userRegistrationDto) {
         UserEntity entity = new UserEntity();

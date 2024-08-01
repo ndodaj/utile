@@ -8,49 +8,44 @@ import al.utile.utile_common.utile.AuthenticationResponse;
 import al.utile.utile_common.utile.UserDto;
 import al.utile.utile_common.utile.UserRegistrationDto;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @Validated
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private UserConverter userConverter;
+    private final UserConverter userConverter;
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
-    private CustomUserDetailsService userDetailsService;
+    public UserService(UserRepository userRepository, UserConverter userConverter, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.userRepository = userRepository;
+        this.userConverter = userConverter;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+    }
 
     public List<UserDto> getAllUsers() {
-        return userRepository.findAll().stream().map(userConverter::toDto).collect(Collectors.toList());
+        return userRepository.findAll()
+                .stream()
+                .map(userConverter::toDto)
+                .toList();
     }
 
     public Optional<UserDto> getUserById(Long id) {
         return userRepository.findById(id).map(userConverter::toDto);
     }
 
-    public UserDto saveUser(UserDto UserDto) {
-        UserEntity entity = userConverter.toEntity(UserDto);
+    public UserDto saveUser(UserDto userDto) {
+        UserEntity entity = userConverter.toEntity(userDto);
         UserEntity savedEntity = userRepository.save(entity);
         return userConverter.toDto(savedEntity);
     }

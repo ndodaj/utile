@@ -4,23 +4,22 @@ import al.utile.utile.converter.JobConverter;
 import al.utile.utile.dto.JobDto;
 import al.utile.utile.entity.JobEntity;
 import al.utile.utile.repository.JobRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.ws.rs.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class JobServiceImpl implements JobService {
 
-    @Autowired
-    private JobRepository jobRepository;
+    private final JobRepository jobRepository;
 
-    @Autowired
-    private JobConverter jobConverter;
+    private final JobConverter jobConverter;
 
     public JobServiceImpl(JobRepository jobRepository, JobConverter jobConverter) {
+        this.jobRepository = jobRepository;
+        this.jobConverter = jobConverter;
     }
 
     @Override
@@ -28,7 +27,7 @@ public class JobServiceImpl implements JobService {
         return jobRepository.findAll()
                 .stream()
                 .map(jobConverter::entityToDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     @Override
@@ -37,20 +36,20 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public JobDto save(JobDto JobDto) {
-        return jobConverter.entityToDto(jobRepository.save(jobConverter.dtoToEntity(JobDto)));
+    public JobDto save(JobDto jobDto) {
+        return jobConverter.entityToDto(jobRepository.save(jobConverter.dtoToEntity(jobDto)));
     }
 
     @Override
-    public JobDto update(Long id, JobDto updatedJobDto) {
+    public JobDto update(Long id, JobDto jobDto) {
         if (!jobRepository.existsById(id)) {
-            throw new RuntimeException("Job not found");
+            throw new NotFoundException("Job not found");
         }
 
-        JobEntity JobEntity = jobRepository.findById(id)
+        JobEntity jobEntity = jobRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Job not found"));
 
-        JobEntity updatedJob = jobConverter.updateJobEntity(updatedJobDto, JobEntity);
+        JobEntity updatedJob = jobConverter.updateJobEntity(jobDto, jobEntity);
         jobRepository.save(updatedJob);
         return jobConverter.entityToDto(updatedJob);
     }

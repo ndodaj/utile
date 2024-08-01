@@ -64,17 +64,17 @@ public class JobEntity extends AuditEntity<String> {
 
     public JobEntity() {/* for JPA */ }
 
-    private JobEntity(JobBuilder JobBuilder) {
-        this.id = JobBuilder.id;
-        this.title = JobBuilder.title;
-        this.postcode = JobBuilder.postcode;
-        this.estimatedStartDate = JobBuilder.estimatedStartDate;
-        this.estimatedDuration = JobBuilder.estimatedDuration;
-        this.description = JobBuilder.description;
-        this.address = JobBuilder.address;
-        this.zone = JobBuilder.zone;
-        this.typeOfProfessional = JobBuilder.typeOfProfessional;
-        this.phoneNumber = JobBuilder.phoneNumber;
+    private JobEntity(JobBuilder jobBuilder) {
+        this.id = jobBuilder.id;
+        this.title = jobBuilder.title;
+        this.postcode = jobBuilder.postcode;
+        this.estimatedStartDate = jobBuilder.estimatedStartDate;
+        this.estimatedDuration = jobBuilder.estimatedDuration;
+        this.description = jobBuilder.description;
+        this.address = jobBuilder.address;
+        this.zone = jobBuilder.zone;
+        this.typeOfProfessional = jobBuilder.typeOfProfessional;
+        this.phoneNumber = jobBuilder.phoneNumber;
     }
 
 

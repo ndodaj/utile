@@ -4,7 +4,6 @@ package al.utile.utile.controller;
 import al.utile.utile.dto.AuthenticationRequest;
 import al.utile.utile.service.UserService;
 import al.utile.utile_common.utile.AuthenticationResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,8 +12,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class AuthenticationController {
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public AuthenticationController(UserService userService) {
+        this.userService = userService;
+    }
 
     @PostMapping("/authenticate")
     public AuthenticationResponse loadUserByCredentials(

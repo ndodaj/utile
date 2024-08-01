@@ -7,9 +7,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -28,14 +26,16 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/users")
 @Tag(name = "Users", description = "User management APIs")
-
 @Validated
+@Slf4j
 public class UserController {
 
-    Logger logger = LoggerFactory.getLogger(UserController.class);
 
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping
     @Operation(summary = "Get all users", description = "Retrieve a list of all users")
@@ -70,8 +70,8 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@Valid @RequestBody UserRegistrationDto userRegistrationDto) {
         // Handle user registration
-        logger.trace("User to be registered: {}", userRegistrationDto.toString());
-        logger.info("User to be registered: {}", userRegistrationDto);
+        log.trace("User to be registered: {}", userRegistrationDto.toString());
+        log.info("User to be registered: {}", userRegistrationDto);
         userService.registerUser(userRegistrationDto);
         return new ResponseEntity<>("User registered successfully", HttpStatus.CREATED);
     }

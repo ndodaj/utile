@@ -2,7 +2,6 @@ package al.utile.utile.service;
 
 import al.utile.utile.entity.UserEntity;
 import al.utile.utile.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,8 +14,11 @@ import java.util.Set;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    public CustomUserDetailsService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -24,9 +26,7 @@ public class CustomUserDetailsService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
 
         Set<SimpleGrantedAuthority> authorities = new HashSet<>();
-        user.getRoles().forEach(role -> {
-            authorities.add(new SimpleGrantedAuthority(role.getName().name()));
-        });
+        user.getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getName().name())));
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
     }

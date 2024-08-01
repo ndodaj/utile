@@ -4,27 +4,29 @@ import al.utile.utile.converter.RoleConverter;
 import al.utile.utile.dto.RoleDto;
 import al.utile.utile.entity.RoleEntity;
 import al.utile.utile.repository.RoleRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.ws.rs.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class RoleService {
 
-    @Autowired
-    private RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
 
-    @Autowired
-    private RoleConverter roleConverter;
+    private final RoleConverter roleConverter;
+
+    public RoleService(RoleRepository roleRepository, RoleConverter roleConverter) {
+        this.roleRepository = roleRepository;
+        this.roleConverter = roleConverter;
+    }
 
     public List<RoleDto> getAllRoles() {
         return roleRepository.findAll()
                 .stream()
                 .map(roleConverter::toDto)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     public Optional<RoleDto> getRoleById(Long id) {
@@ -32,14 +34,14 @@ public class RoleService {
                 .map(roleConverter::toDto);
     }
 
-    public RoleDto saveRole(RoleDto RoleDto) {
-        RoleEntity role = roleConverter.toEntity(RoleDto);
+    public RoleDto saveRole(RoleDto roleDto) {
+        RoleEntity role = roleConverter.toEntity(roleDto);
         RoleEntity savedRole = roleRepository.save(role);
         return roleConverter.toDto(savedRole);
     }
 
     public RoleDto updateRole(Long id, RoleDto roleDetails) {
-        RoleEntity role = roleRepository.findById(id).orElseThrow(() -> new RuntimeException("Role not found"));
+        RoleEntity role = roleRepository.findById(id).orElseThrow(() -> new NotFoundException("Role not found"));
         role.setName(roleDetails.name());
         RoleEntity updatedRole = roleRepository.save(role);
         return roleConverter.toDto(updatedRole);

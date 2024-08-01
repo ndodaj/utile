@@ -12,9 +12,9 @@ public interface JobService {
 
     Optional<JobDto> findById(Long id);
 
-    JobDto save(JobDto JobDto);
+    JobDto save(JobDto jobDto);
 
-    JobDto update(Long id, JobDto JobDto);
+    JobDto update(Long id, JobDto jobDto);
 
     void delete(Long id);
 }

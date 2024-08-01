@@ -4,7 +4,6 @@ import al.utile.utile.dto.RoleDto;
 import al.utile.utile.service.RoleService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,9 +20,12 @@ import java.util.Optional;
 @RequestMapping("/roles")
 @Tag(name = "Roles", description = "Role management APIs")
 public class RoleController {
-    // http://localhost:8080/swagger-ui.html
-    @Autowired
-    private RoleService roleService;
+
+    private final RoleService roleService;
+
+    public RoleController(RoleService roleService) {
+        this.roleService = roleService;
+    }
 
     @GetMapping
     @Operation(summary = "Get all roles", description = "Retrieve a list of all roles")

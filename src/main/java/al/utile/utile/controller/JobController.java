@@ -2,8 +2,14 @@ package al.utile.utile.controller;
 
 import al.utile.utile.dto.JobDto;
 import al.utile.utile.service.JobService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -11,8 +17,11 @@ import java.util.List;
 @RequestMapping("/api/jobs")
 public class JobController {
 
-    @Autowired
-    private JobService jobService;
+    private final JobService jobService;
+
+    public JobController(JobService jobService) {
+        this.jobService = jobService;
+    }
 
     @GetMapping
     public List<JobDto> getAllJobs() {
@@ -25,13 +34,13 @@ public class JobController {
     }
 
     @PostMapping
-    public JobDto createJob(@RequestBody JobDto JobDto) {
-        return jobService.save(JobDto);
+    public JobDto createJob(@RequestBody JobDto jobDto) {
+        return jobService.save(jobDto);
     }
 
     @PutMapping("/{id}")
-    public JobDto updateJob(@PathVariable Long id, @RequestBody JobDto JobDto) {
-        return jobService.update(id, JobDto);
+    public JobDto updateJob(@PathVariable Long id, @RequestBody JobDto jobDto) {
+        return jobService.update(id, jobDto);
     }
 
     @DeleteMapping("/{id}")
