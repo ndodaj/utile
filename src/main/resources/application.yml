@@ -48,7 +48,7 @@ springdoc:
     enabled: true
 
 server:
-  port: 8088  # utile
+  port: 8083  # utile
 
 
 eureka:
