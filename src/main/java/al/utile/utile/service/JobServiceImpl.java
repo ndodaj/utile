@@ -1,9 +1,9 @@
 package al.utile.utile.service;
 
 import al.utile.utile.converter.JobConverter;
-import al.utile.utile.dto.JobDto;
 import al.utile.utile.entity.JobEntity;
 import al.utile.utile.repository.JobRepository;
+import al.utile.utile_common.utile.dto.JobDto;
 import jakarta.ws.rs.NotFoundException;
 import org.springframework.stereotype.Service;
 

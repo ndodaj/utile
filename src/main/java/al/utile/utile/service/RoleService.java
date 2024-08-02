@@ -1,16 +1,18 @@
 package al.utile.utile.service;
 
 import al.utile.utile.converter.RoleConverter;
-import al.utile.utile.dto.RoleDto;
 import al.utile.utile.entity.RoleEntity;
 import al.utile.utile.repository.RoleRepository;
+import al.utile.utile_common.utile.dto.RoleDto;
 import jakarta.ws.rs.NotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class RoleService {
 
     private final RoleRepository roleRepository;

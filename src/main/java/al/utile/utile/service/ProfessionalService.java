@@ -1,6 +1,6 @@
 package al.utile.utile.service;
 
-import al.utile.utile_common.utile.ProfessionalDto;
+import al.utile.utile_common.utile.dto.ProfessionalDto;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;

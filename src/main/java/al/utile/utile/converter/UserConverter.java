@@ -1,8 +1,8 @@
 package al.utile.utile.converter;
 
 import al.utile.utile.entity.UserEntity;
-import al.utile.utile_common.utile.UserDto;
-import al.utile.utile_common.utile.UserRegistrationDto;
+import al.utile.utile_common.utile.dto.UserDto;
+import al.utile.utile_common.utile.dto.UserRegistrationDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;

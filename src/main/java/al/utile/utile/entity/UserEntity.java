@@ -1,8 +1,8 @@
 package al.utile.utile.entity;
 
 
-import al.utile.utile_common.utile.StatusEnum;
-import al.utile.utile_common.utile.AccountType;
+import al.utile.utile_common.utile.dto.StatusEnum;
+import al.utile.utile_common.utile.dto.AccountType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

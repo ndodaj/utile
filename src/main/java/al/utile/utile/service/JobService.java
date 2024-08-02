@@ -1,7 +1,8 @@
 package al.utile.utile.service;
 
 
-import al.utile.utile.dto.JobDto;
+
+import al.utile.utile_common.utile.dto.JobDto;
 
 import java.util.List;
 import java.util.Optional;

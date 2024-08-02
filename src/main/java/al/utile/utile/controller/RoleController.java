@@ -1,8 +1,10 @@
 package al.utile.utile.controller;
 
-import al.utile.utile.dto.RoleDto;
 import al.utile.utile.service.RoleService;
+import al.utile.utile_common.utile.dto.RoleDto;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,9 +29,10 @@ public class RoleController {
         this.roleService = roleService;
     }
 
-    @GetMapping
-    @Operation(summary = "Get all roles", description = "Retrieve a list of all roles")
 
+    @GetMapping
+    @Operation(summary = "Get all roles", description = "Retrieve a list of all roles", security = { @SecurityRequirement(name = "bearer-key")} )
+    @SecurityRequirements
     public List<RoleDto> getAllRoles() {
         return roleService.getAllRoles();
     }

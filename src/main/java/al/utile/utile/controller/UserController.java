@@ -1,8 +1,8 @@
 package al.utile.utile.controller;
 
 import al.utile.utile.service.UserService;
-import al.utile.utile_common.utile.UserDto;
-import al.utile.utile_common.utile.UserRegistrationDto;
+import al.utile.utile_common.utile.dto.UserDto;
+import al.utile.utile_common.utile.dto.UserRegistrationDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;

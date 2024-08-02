@@ -1,7 +1,7 @@
 package al.utile.utile.converter;
 
-import al.utile.utile.dto.JobDto;
 import al.utile.utile.entity.JobEntity;
+import al.utile.utile_common.utile.dto.JobDto;
 import org.springframework.stereotype.Component;
 
 @Component

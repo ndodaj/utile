@@ -3,7 +3,7 @@ package al.utile.utile.controller;
 
 import al.utile.utile.dto.AuthenticationRequest;
 import al.utile.utile.service.UserService;
-import al.utile.utile_common.utile.AuthenticationResponse;
+import al.utile.utile_common.utile.dto.AuthenticationResponse;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
